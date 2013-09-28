@@ -1,19 +1,19 @@
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.16.1
+Version:	0.18.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.16/%{name}-%{version}.tar.xz
-# Source0-md5:	1f17e92511a21240ab5a56e4523f77da
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.18/%{name}-%{version}.tar.xz
+# Source0-md5:	69a12ed68893f2e1e81ac4e531bc1515
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gtk+3-devel
+BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
-BuildRequires:	vala
+BuildRequires:	vala-vapigen >= 0.22.0
 Requires(post,postun):	glib-gio
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus
@@ -123,7 +123,6 @@ gio-querymodules %{_libdir}/gio/modules ||:
 %files editor
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
-%{_datadir}/dconf-editor
 %{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
 %{_desktopdir}/dconf-editor.desktop
 %{_iconsdir}/hicolor/*/apps/dconf-editor.*
