@@ -1,19 +1,19 @@
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.18.0
-Release:	1
+Version:	0.20.0
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.18/%{name}-%{version}.tar.xz
-# Source0-md5:	69a12ed68893f2e1e81ac4e531bc1515
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.20/%{name}-%{version}.tar.xz
+# Source0-md5:	542db78e4867ac575ec0f69f79b3eebd
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gtk+3-devel >= 3.10.0
+BuildRequires:	gtk+3-devel >= 3.12.0
 BuildRequires:	gtk-doc
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
-BuildRequires:	vala-vapigen >= 0.22.0
+BuildRequires:	vala-vapigen >= 0.24.0
 Requires(post,postun):	glib-gio
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus
@@ -78,6 +78,7 @@ API documentation for dconf library.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/dconf/{db,profile}
+install -d $RPM_BUILD_ROOT%{_datadir}/dconf/{db,profile}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -112,9 +113,12 @@ gio-querymodules %{_libdir}/gio/modules ||:
 %dir %{_sysconfdir}/dconf
 %dir %{_sysconfdir}/dconf/db
 %dir %{_sysconfdir}/dconf/profile
-%dir %{_libexecdir}
+%dir %{_datadir}/dconf
+%dir %{_datadir}/dconf/db
+%dir %{_datadir}/dconf/profile
 %attr(755,root,root) %{_bindir}/dconf
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
+%dir %{_libexecdir}
 %attr(755,root,root) %{_libexecdir}/dconf-service
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_mandir}/man1/dconf-service.1*
