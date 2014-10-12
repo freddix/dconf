@@ -1,19 +1,19 @@
 Summary:	Low-level configuration system
 Name:		dconf
-Version:	0.20.0
-Release:	2
+Version:	0.22.0
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.20/%{name}-%{version}.tar.xz
-# Source0-md5:	542db78e4867ac575ec0f69f79b3eebd
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dconf/0.22/%{name}-%{version}.tar.xz
+# Source0-md5:	5459a539ffc483f9c002ddeab626a64e
 URL:		http://live.gnome.org/dconf
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gtk+3-devel >= 3.12.0
+BuildRequires:	gtk+3-devel >= 3.14.0
 BuildRequires:	gtk-doc
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
-BuildRequires:	vala-vapigen >= 0.24.0
+BuildRequires:	vala-vapigen >= 0.26.0
 Requires(post,postun):	glib-gio
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	dbus
@@ -49,7 +49,6 @@ Requires(post,postun):	/usr/bin/gtk-update-icon-cache
 Requires(post,postun):	glib-gio-gsettings
 Requires(post,postun):	hicolor-icon-theme
 
-
 %description editor
 dconf-editor allows you to browse and modify dconf database.
 
@@ -60,6 +59,14 @@ Requires:	gtk-doc-common
 
 %description apidocs
 API documentation for dconf library.
+
+%package -n bash-completion-%{name}
+Summary:	BASH auto-complete site functions
+Group:		Documentation
+Requires:	bash
+
+%description -n bash-completion-%{name}
+BASH auto-complete site functions.
 
 %prep
 %setup -q
@@ -120,6 +127,7 @@ gio-querymodules %{_libdir}/gio/modules ||:
 %attr(755,root,root) %{_libdir}/gio/modules/libdconfsettings.so
 %dir %{_libexecdir}
 %attr(755,root,root) %{_libexecdir}/dconf-service
+%{_datadir}/dbus-1/services/ca.desrt.dconf-editor.service
 %{_datadir}/dbus-1/services/ca.desrt.dconf.service
 %{_mandir}/man1/dconf-service.1*
 %{_mandir}/man1/dconf.1*
@@ -128,7 +136,7 @@ gio-querymodules %{_libdir}/gio/modules ||:
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/dconf-editor
 %{_datadir}/glib-2.0/schemas/ca.desrt.dconf-editor.gschema.xml
-%{_desktopdir}/dconf-editor.desktop
+%{_desktopdir}/ca.desrt.dconf-editor.desktop
 %{_iconsdir}/hicolor/*/apps/dconf-editor.*
 %{_mandir}/man1/dconf-editor.1*
 
@@ -152,4 +160,8 @@ gio-querymodules %{_libdir}/gio/modules ||:
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/dconf
+
+%files -n bash-completion-%{name}
+%attr(755,root,root)
+%{_datadir}/bash-completion/completions/*
 
